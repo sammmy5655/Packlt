@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PackIt - Smart Travel Assistant</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      background: linear-gradient(-45deg,#ff9a9e,#fad0c4,#a1c4fd,#c2e9fb);
+      background-size: 800% 800%;
+      animation: gradientBG 20s ease infinite;
+      overflow-x: hidden;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      25% { background-position:50% 100%; }
+      50% { background-position:100% 50%; }
+      75% { background-position:50% 0%; }
+      100% { background-position:0% 50%; }
+    }
+    .color-bubbles {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 0;
+    }
+    .color-bubbles span {
+      position: absolute; display: block;
+      width: 8px; height: 8px;
+      background: radial-gradient(circle,#ff6ec4,#7873f5);
+      border-radius: 50%; opacity: 0.6;
+      animation: floatColor 8s linear infinite;
+    }
+    @keyframes floatColor {
+      0% { transform: translateY(100vh) scale(0.5); opacity:0.3; }
+      50% { transform: translateY(50vh) scale(1.2) rotate(180deg); opacity:0.8; }
+      100% { transform: translateY(-10vh) scale(0.5); opacity:0; }
+    }
+    header { text-align:center; padding:60px 20px; color:white; position:relative; z-index:2; }
+    header h1 { font-size:52px;
+      text-shadow:0 0 10px #fff,0 0 20px #00b4db,0 0 30px #0083b0;
+      animation: pulseText 2s infinite;
+    }
+    @keyframes pulseText {
+      0%,100% { text-shadow:0 0 10px #fff,0 0 20px #00b4db,0 0 30px #0083b0; }
+      50% { text-shadow:0 0 15px #fff,0 0 30px #00b4db,0 0 40px #0083b0; }
+    }
+    nav {
+      display:flex; justify-content:center;
+      gap:30px; background-color:rgba(255,255,255,0.9);
+      padding:15px 0; position:sticky; top:0; z-index:10;
+    }
+    nav a { color:#0083b0; text-decoration:none; font-size:18px; }
+    nav a:hover { text-decoration:underline; }
+    .main-section { padding:50px 20px; max-width:1100px; margin:auto; position:relative; z-index:2; }
+    .features { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
+    .feature {
+      background:rgba(255,255,255,0.95); border-radius:12px; padding:20px;
+      width:280px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.2);
+      transition:transform .4s ease, box-shadow .4s ease; cursor:pointer;
+    }
+    .feature:hover { transform:scale(1.08); box-shadow:0 0 20px #00c3ff,0 0 30px #00c3ff; }
+    .feature h3 { font-size:22px; margin-bottom:10px; animation: bounce 3s infinite; }
+    @keyframes bounce { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-5px); } }
+    .feature p { font-size:15px; color:#444; }
+    .start-btn {
+      display:inline-block; padding:15px 30px; font-size:20px;
+      background:#00b894; color:white; border-radius:8px; text-decoration:none;
+      transition:background .3s ease, transform .3s ease;
+    }
+    .start-btn:hover { background:#019874; transform:scale(1.1); }
+    #start, #faq {
+      padding:80px 20px; text-align:center;
+      background:rgba(255,255,255,0.95); margin-top:60px; border-radius:16px;
+      box-shadow:0 5px 20px rgba(0,0,0,0.1); position:relative; z-index:2;
+    }
+    #start h2, #faq h2 { font-size:30px; margin-bottom:20px; }
+    #start p, #faq p { font-size:18px; color:#555; max-width:700px; margin:auto; }
+    label { display:block; margin-top:10px; }
+    input, button { font-size:16px; padding:10px; margin-top:5px; border-radius:6px; }
+    input { width:calc(50% - 12px); border:1px solid #ccc; }
+    #packingList ul { list-style: disc; margin-left:20px; }
+  </style>
+</head>
+<body>
+  <div class="color-bubbles">
+    <span style="left:5%; animation-delay:0s;"></span>
+    <span style="left:15%; animation-delay:1s;"></span>
+    <span style="left:25%; animation-delay:2s;"></span>
+    <span style="left:35%; animation-delay:3s;"></span>
+    <span style="left:45%; animation-delay:1.5s;"></span>
+    <!-- (rest similar spans...) -->
+  </div>
+
+  <header>
+    <h1>Welcome to PackIt</h1>
+    <p>Your Smartest Travel Buddy — Plan. Pack. Go.</p>
+  </header>
+
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#start">Start Packing</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+
+  <div class="main-section" id="features">
+    <h2>🌟 Features You'll Love</h2>
+    <div class="features">
+      <div class="feature"><h3>📍 Destination Based</h3><p>Adjusts packing list based on weather.</p></div>
+      <div class="feature"><h3>👫 Gender-Specific</h3><p>Separate lists for males and females.</p></div>
+      <div class="feature"><h3>🧠 AI Smart Suggestions</h3><p>Recommends items based on conditions.</p></div>
+      <div class="feature"><h3>⏱️ Quick Setup</h3><p>Ready in seconds!</p></div>
+    </div>
+    <div style="text-align:center">
+      <a class="start-btn" href="#start">Start Packing</a>
+    </div>
+  </div>
+
+  <section id="start">
+    <h2>📦 Start Packing</h2>
+    <form onsubmit="event.preventDefault(); generatePackingList();">
+      <input type="text" id="destination" placeholder="City (e.g. Delhi)" required>
+      <input type="number" id="days" placeholder="Days" required>
+      <input type="number" id="males" placeholder="Males" required>
+      <input type="number" id="females" placeholder="Females" required>
+      <button type="submit" class="start-btn">Generate List</button>
+    </form>
+    <div id="packingList" style="margin-top:30px;"></div>
+  </section>
+
+  <section id="faq">
+    <h2>❓ Frequently Asked Questions</h2>
+    <p><strong>Q:</strong> How does this work?<br><strong>A:</strong> It uses live weather from Open‑Meteo and AI logic to suggest packing items.</p>
+    <p><strong>Q:</strong> Is it free?<br><strong>A:</strong> Yes, completely free!</p>
+  </section>
+
+  <script>
+    async function getCoordinates(city) {
+      const resp = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`);
+      const data = await resp.json();
+      if (!data.results || data.results.length === 0) throw new Error("City not found");
+      return { lat:data.results[0].latitude, lon:data.results[0].longitude, name:data.results[0].name };
+    }
+    async function getWeather(lat, lon) {
+      const resp = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+      const data = await resp.json();
+      return data.current_weather.temperature;
+    }
+    function suggestItems(temp, males, females, days) {
+      let items=[`Underwear x${days}`,`Socks x${days}`,`Toothbrush`,`Phone Charger`];
+      if (temp<10) items.push("Heavy Jacket","Thermals","Gloves");
+      else if(temp<20) items.push("Light Jacket","Sweater");
+      else items.push("T‑Shirts","Shorts","Sunscreen");
+      if (males>0) items.push("Shaving Kit");
+      if (females>0) items.push("Makeup Kit","Hairbrush");
+      return items;
+    }
+    async function generatePackingList(){
+      const city=document.getElementById('destination').value;
+      const days=+document.getElementById('days').value;
+      const males=+document.getElementById('males').value;
+      const females=+document.getElementById('females').value;
+      const coords=await getCoordinates(city).catch(e=>alert(e.message));
+      if(!coords) return;
+      const temp=await getWeather(coords.lat,coords.lon).catch(e=>alert("Weather fetch error"));
+      const items=suggestItems(temp,males,females,days);
+      document.getElementById('packingList').innerHTML=`
+        <h3>Packing List for ${coords.name} (Temp: ${temp}°C)</h3>
+        <ul>${items.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+    }
+  </script>
+</body>
+</html>
